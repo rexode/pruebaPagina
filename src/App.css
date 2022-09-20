@@ -16,12 +16,18 @@
   justify-content: space-between;
   padding: 5px 20px;
   font-size: 16px;
+  background-color: aqua;
 }
 .button{
+background: url('https://api.iconify.design/el/refresh.svg') no-repeat center center / contain;
+content: url('https://api.iconify.design/el/refresh.svg');
 border: none;
 border-radius: 50px;
 padding: 3px 9px;
 cursor: pointer;
+width: 50px;
+height: 50px;
+padding-right: 10px;
 
 }
 .logo{

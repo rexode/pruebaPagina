@@ -6,32 +6,33 @@ import abi from "./abi/abi.json";
 function App() {
   const [account, setAccount] = useState(null);
   const [provider, setProvider] = useState(null);
-  const [tickets, setTickets] = useState(0);
-  const [id, setId] = useState(0);
+  const [cost, setcost] = useState(0);
+  const [prize, setPrize] = useState(0);
+  const Aeth=10**18;
 
   const reloadPage = async () => {
     await getId();
-    await Ntickets();
+    await getCost();
   };
   const getId = async () => {
     const contract = new ethers.Contract(
-      "0x6F7CA49667755C73a847C43c662d2121F1e5C225",
+      "0x99C60f65116f63a06F84113c40A769C067D7FBd2",
       abi,
       provider
     );
-    const temId = await contract.prize();
-    console.log(temId.toString());
-    setId(temId);
+    const temPrize = await contract.prize()/Aeth;
+    console.log(temPrize.toString());
+    setPrize(temPrize);
   };
-  const Ntickets = async () => {
+  const getCost = async () => {
     const contract = new ethers.Contract(
-      "0x6F7CA49667755C73a847C43c662d2121F1e5C225",
+      "0x99C60f65116f63a06F84113c40A769C067D7FBd2",
       abi,
       provider
     );
-    const temTickets = await contract.s_randomWords(1);
-    console.log(temTickets.toString());
-    setTickets(temTickets);
+    const temCost = await contract.costTicket()/Aeth;
+    console.log(temCost.toString());
+    setcost(temCost);
   };
   const initConnection = async () => {
     if (typeof window.ethereum !== "undefined") {
@@ -56,7 +57,7 @@ function App() {
     <div className="page">
       <div className="header">
         <img src={require("./assets/images/logo.png")} className="logo" />
-        <p>{tickets.toString()}</p>
+        <p>{cost.toString()}</p>
         {account == null ? (
           <button onClick={initConnection} className="button">
             Connect
@@ -66,9 +67,8 @@ function App() {
         )}
       </div>
       <button onClick={reloadPage} className="button">
-        Prueba
       </button>
-      <p>{id.toString()}</p>
+      <p>{prize.toString()}</p>
     </div>
   );
 }
